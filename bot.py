@@ -17,7 +17,7 @@ def socket_server(sock):
         data = sock.recv(4096).decode("utf-8")
         data = data.replace("\r", "")
         for live_hash in live_hashes:
-            if live_hash.lower() in data:
+            if live_hash.lower() in data.lower():
                 with open(f"RequestLogs/{live_hash}.log", "a") as add:
                     add.write(f"{data}\n")
                 sock.send(str.encode("HTTP/1.1 200 OK\n\n" + data))
